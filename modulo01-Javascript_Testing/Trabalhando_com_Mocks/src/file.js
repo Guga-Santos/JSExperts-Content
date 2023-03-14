@@ -22,7 +22,8 @@ class File {
       }
     }
 
-    if(!fileWithoutHeader.length) {
+    if(!fileWithoutHeader.length ||
+      fileWithoutHeader.length > options.maxLines) {
       return {
         error: error.FILE_LENGTH_ERROR_MESSAGE,
         valid: false
