@@ -13,6 +13,15 @@ class File {
   }
   static isValid(csvString, options = DEFAULT_OPTION) {
     const [headers, ...fileWithoutHeader] = csvString.split(/\r?\n/)
+    const isHeaderValid = headers === options.fields.join(',')
+
+    if(!isHeaderValid) {
+      return {
+        error: error.FILE_FIELDS_ERROR_MESSAGE,
+        valid: false
+      }
+    }
+
     if(!fileWithoutHeader.length) {
       return {
         error: error.FILE_LENGTH_ERROR_MESSAGE,

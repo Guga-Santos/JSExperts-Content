@@ -13,4 +13,11 @@ const assert = require('assert');
     await assert.rejects(result, expected);
   }
 
+  {
+    const filePath = './mocks/invalid-header.csv';
+    const expected = new Error(error.FILE_FIELDS_ERROR_MESSAGE);
+    const result = File.csvToJSON(filePath);
+    await assert.rejects(result, expected);
+  }
+
 })()
