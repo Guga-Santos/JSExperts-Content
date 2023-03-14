@@ -1,0 +1,5 @@
+nvm install 19 = Instala a versão 19 do node.
+nvm install --lts = Instala a versão long-term support (versão recomendada).
+nvm list = Mostra a lista de tags.
+nvm use 18 = Usa a versão 18 que já está instalada na minha maquina.
+nvm alias default 18 = Define a versão padrão do Node.js para ser a 18.
