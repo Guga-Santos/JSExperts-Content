@@ -27,4 +27,30 @@ const assert = require('assert');
     await assert.rejects(result, expected);
   }
 
+  {
+    const filePath = './mocks/threeItems-valid.csv';
+    const expected = [
+      {
+        id: 1,
+        name: 'Cacau Noel',
+        profession: 'sleeper',
+        age: 1
+      },
+      {
+        id: 2,
+        name: 'Amanda Lucena',
+        profession: 'Biologist',
+        age: 30
+      },
+      {
+        id: 3,
+        name: 'Gustavo Santos',
+        profession: 'HouseKeeper',
+        age: 39
+      }
+    ]
+    const result = await File.csvToJSON(filePath);
+    assert.deepEqual(result, expected);
+  }
+
 })()
