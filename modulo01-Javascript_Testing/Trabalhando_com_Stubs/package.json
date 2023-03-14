@@ -11,5 +11,8 @@
   },
   "keywords": [],
   "author": "Guga",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "sinon": "^15.0.1"
+  }
 }
