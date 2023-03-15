@@ -51,6 +51,7 @@ describe('API Suite test', () => {
         .send(WRONG_USER)
         .expect(401)
 
+        assert.ok(response.unauthorized)
         assert.strictEqual(response.text, 'Login Failed')
     })
 
@@ -60,6 +61,7 @@ describe('API Suite test', () => {
         .send(WRONG_PASSWORD)
         .expect(401)
 
+        assert.ok(response.unauthorized)
         assert.strictEqual(response.text, 'Login Failed')
     })
   })
