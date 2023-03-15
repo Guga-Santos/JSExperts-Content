@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/api.js",
     "test:dev": "npx mocha -w src/*.test.js",
-    "test:cov": "npx nyc npx mocha -w src/*.test.js",
+    "test:cov": "npx nyc npx mocha src/*.test.js",
     "test": "npx mocha -w src/*.test.js"
 
   },
@@ -14,7 +14,7 @@
     "node": "18"
   },
   "keywords": [],
-  "author": "",
+  "author": "Guga",
   "license": "ISC",
   "devDependencies": {
     "mocha": "^10.2.0",
