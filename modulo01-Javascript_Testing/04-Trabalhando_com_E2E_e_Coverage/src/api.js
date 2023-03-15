@@ -21,8 +21,7 @@ const routes = {
       response.end('Login Failed')
       return
     }
-    console.log('data', user)
-    response.end() },
+    response.end('ok') },
 
   default(request, response) {
     response.writeHead(404) 
