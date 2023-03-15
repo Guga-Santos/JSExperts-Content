@@ -11,7 +11,15 @@ const routes = {
     response.end() },
 
   '/login:post': async (request, response) => { 
-    const data = await JSON.parse(once(request, 'data'));
+    const user = JSON.parse(await once(request, 'data'));
+    if (
+      user.username !== DEFAULT_USER.username || 
+      user.password !== DEFAULT_USER.password
+      ) {
+      response.writeHead(401)
+      response.end('Login Failed')
+      return
+    }
     console.log('data', data)
     response.end() },
 
