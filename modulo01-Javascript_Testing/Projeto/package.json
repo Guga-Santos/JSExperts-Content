@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:dev": "npx mocha -w */**/*.test.js",
+    "test:cov": "npx nyc npx mocha */**/*.test.js",
+    "test": "npx mocha -w */**/*.test.js",
     "seed": "node ./seed"
   },
   "keywords": [],
@@ -12,5 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "faker": "^5.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
+    "sinon": "^9.2.4"
   }
 }
