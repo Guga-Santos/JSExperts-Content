@@ -121,6 +121,11 @@ describe('CarService Suite Tests', () => {
     const now = new Date(2020, 10, 5);
     sandbox.useFakeTimers(now.getTime());
 
+    sandbox.stub(
+      carService.carRepository,
+      carService.carRepository.find.name,
+    ).returns(car)
+
     const expectedAmount = carService.currencyFormat.format(206.8);
     const result = await carService.rent(
       customer,

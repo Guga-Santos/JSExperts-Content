@@ -27,7 +27,7 @@ class CarService {
       amount: finalPrice,
       dueDate
     })
-    console.log(transaction)
+    
     return transaction;
   }
 
