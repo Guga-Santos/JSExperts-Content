@@ -3,6 +3,11 @@ const BaseRepository = require("../repository/base/baseRepository");
 class CarService {
   constructor({ cars }) {
     this.carRepository = new BaseRepository({ file: cars })
+
+    this.currencyFormat = new Intl.NumberFormat('pt-br', {
+      style: 'currency',
+      currency: 'BRL'
+    })
   } 
 
   getRandomPositionFromArray(list) {

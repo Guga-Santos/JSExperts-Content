@@ -76,4 +76,16 @@ describe('CarService Suite Tests', () => {
     expect(carService.carRepository.find.calledWithExactly(car.id)).to.be.true;
     expect(result).to.be.deep.equal(expected);
   })
+
+  it('Ensure its calculate the final amout in real', async () => {
+    const customer = Object.create(mocks.validCustomer);
+    customer.age = 50;
+
+    const carCategory = Object.create(mocks.validCarCategory);
+    carCategory.price = 37.6;
+
+    const numberOfDays = 5;
+
+    const expected = carService.currencyFormat.format(244.40);
+  })
 })
