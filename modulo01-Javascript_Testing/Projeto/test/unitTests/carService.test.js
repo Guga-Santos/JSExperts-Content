@@ -2,7 +2,7 @@ const { describe, it, before, after } = require('mocha');
 const CarService = require('./../../src/service/carService');
 
 const { join } = require('path');
-const assert = require('assert');
+const { expect } = require('chai');
 
 const carsDatabase = join(__dirname, './../../database', 'cars.json');
 
@@ -27,6 +27,6 @@ describe('CarService Suite Tests', () => {
     const result = await carService.getAvailableCar(carCategory);
     const expected = car;
     
-    assert.deepStrictEqual(result, expected);
+    expect(result).to.be.deep.equal(expected);
   })
 })
