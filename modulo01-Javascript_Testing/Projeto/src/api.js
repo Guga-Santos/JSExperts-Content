@@ -13,12 +13,14 @@ const CarService = require('./service/carService');
 const carService = new CarService({
   cars: carsDatabase
 });
+
 {/*
 Rotas a serem construidas:
 - Get Cars
 - Get TotalPrice
 - Post Rent
 */}
+
 const routes = {
   '/:get': (request, response) => {
     response.write('Página Inicial');
@@ -77,4 +79,4 @@ const PORT = 3000;
 
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`))
 
-module.exports = app;
+module.exports = app
