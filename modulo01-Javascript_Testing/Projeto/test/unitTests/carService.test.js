@@ -64,9 +64,16 @@ describe('CarService Suite Tests', () => {
       carService.carRepository.find.name
     ).returns(car);
 
+    sandbox.spy(
+      carService,
+      carService.chooseRandomCar.name
+    )
+
     const result = await carService.getAvailableCar(carCategory);
     const expected = car;
     
+    expect(carService.chooseRandomCar.calledOnce).to.be.true;
+    expect(carService.carRepository.find.calledWithExactly(car.id)).to.be.true;
     expect(result).to.be.deep.equal(expected);
   })
 })
