@@ -1,12 +1,18 @@
 const http = require('http');
 const { readFile } = require('fs/promises');
 const { join } = require('path');
+const { once } = require('events');
 
 const categoriesDatabase = join(__dirname, './../database', 'carCategories.json');
 const carsDatabase = join(__dirname, './../database', 'cars.json');
 
 
 const BaseRepository = require('./repository/base/baseRepository');
+const CarService = require('./service/carService');
+
+const carService = new CarService({
+  cars: carsDatabase
+});
 {/*
 Rotas a serem construidas:
 - Get Cars
@@ -32,8 +38,21 @@ const routes = {
     response.write(JSON.stringify(data))
     return response.end();
   },
-  '/totalprice:get': (request, response) => {
-    response.write('Valor total')
+  '/totalprice:post': async (request, response) => {
+    const data = JSON.parse(await once(request, "data"))
+    const { customer: { age }, carCategory: { price }, numberOfDays } = data;
+    if(!age || !price || !numberOfDays) {
+      response.write("Tá faltando coisa aÊ")
+      return response.end();
+    }
+    const totalPrice = carService.calculateFinalPrice(
+      customer = data.customer, carCategory = data.carCategory, numberOfDays
+    )
+    response.write(JSON.stringify({ 
+      customerAge: age,
+      dayPrice: price,
+      totalPrice: totalPrice
+    }))
     return response.end();
   },
   '/rent:post': (request, response) => {
