@@ -7,7 +7,11 @@
     "test:dev": "npx mocha -w */**/*.test.js",
     "test:cov": "npx nyc npx mocha */**/*.test.js",
     "test": "npx mocha -w */**/*.test.js",
-    "seed": "node ./seed"
+    "seed": "node ./seed",
+    "start": "node ./src/api.js"
+  },
+  "engines": {
+    "node": "18"
   },
   "keywords": [],
   "author": "Guga",
