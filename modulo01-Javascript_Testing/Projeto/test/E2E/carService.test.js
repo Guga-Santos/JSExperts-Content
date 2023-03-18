@@ -56,4 +56,39 @@ describe('E2E Suite tests', () => {
       expect(data).to.haveOwnProperty('gasAvailable')
     })
   })
+
+  describe('TotalPrice POST Route', () => {
+    it('Ensure returns status 200 and the right text', async () => {
+      const response = await supertest(app)
+      .post('/totalprice')
+      .send({
+        "customer": {
+          "age": 45
+        },
+        "carCategory": {
+          "price": 96.6
+        },
+        "numberOfDays": 15
+      })
+      .expect(200)
+
+      const responseData = JSON.parse(response.text)
+
+      expect(responseData).to.haveOwnProperty('customerAge')
+      expect(responseData).to.haveOwnProperty('dayPrice')
+      expect(responseData).to.haveOwnProperty('totalPrice')
+    })
+  })
+
+  describe('Rent POST Route', () => {
+    it('Ensure returns status 200 and the right text', async () => {
+      const response = await supertest(app)
+      .post('/rent')
+      .send({
+        "customer": {"age": 45},
+        "numberOfDays": 15
+      })
+      .expect(200)
+    })
+  })
 })

@@ -6,8 +6,6 @@ const { once } = require('events');
 const categoriesDatabase = join(__dirname, './../database', 'carCategories.json');
 const carsDatabase = join(__dirname, './../database', 'cars.json');
 
-
-const BaseRepository = require('./repository/base/baseRepository');
 const CarService = require('./service/carService');
 
 const carService = new CarService({
@@ -44,11 +42,13 @@ const routes = {
     const data = JSON.parse(await once(request, "data"))
     const { customer: { age }, carCategory: { price }, numberOfDays } = data;
     if(!age || !price || !numberOfDays) {
-      response.write("Tá faltando coisa aÊ")
+      response.write("Some fields are missing!")
       return response.end();
     }
     const totalPrice = carService.calculateFinalPrice(
-      customer = data.customer, carCategory = data.carCategory, numberOfDays
+      customer = data.customer, 
+      carCategory = data.carCategory, 
+      numberOfDays
     )
     response.write(JSON.stringify({ 
       customerAge: age,
@@ -57,8 +57,22 @@ const routes = {
     }))
     return response.end();
   },
-  '/rent:post': (request, response) => {
-    response.write('Nota Fiscal');
+  '/rent:post': async (request, response) => {
+    const data = JSON.parse(await once(request, "data"))
+    const { customer: { age }, numberOfDays } = data;
+    if(!age || !numberOfDays) {
+      response.write("Some fields are missing!")
+      return response.end();
+    }
+
+    const [carCategory] = JSON.parse(await readFile(categoriesDatabase, "utf8"))
+    
+    const ticket = await carService.rent( 
+      customer = data.customer, 
+      carCategory, 
+      numberOfDays)
+
+    response.write(JSON.stringify(ticket));
     return response.end()
   },
   default(request, response) {
