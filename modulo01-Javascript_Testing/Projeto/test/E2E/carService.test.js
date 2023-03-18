@@ -78,6 +78,14 @@ describe('E2E Suite tests', () => {
       expect(responseData).to.haveOwnProperty('dayPrice')
       expect(responseData).to.haveOwnProperty('totalPrice')
     })
+    it('Ensure it returns status 400 when fields are missing', async () => {
+      const response = await supertest(app)
+      .post('/totalprice')
+      .send({})
+      .expect(400)
+
+      expect(response.text).to.be.equal('Some fields are missing!')
+    })
   })
 
   describe('Rent POST Route', () => {
@@ -89,6 +97,32 @@ describe('E2E Suite tests', () => {
         "numberOfDays": 15
       })
       .expect(200)
+
+      const responseData = JSON.parse(response.text)
+
+      expect(responseData).to.haveOwnProperty('customer')
+      expect(responseData).to.haveOwnProperty('car')
+      expect(responseData).to.haveOwnProperty('amount')
+      expect(responseData).to.haveOwnProperty('dueDate')
+    })
+
+    it('Ensure it returns status 400 when fields are missing', async () => {
+      const response = await supertest(app)
+      .post('/rent')
+      .send({})
+      .expect(400)
+      
+      expect(response.text).to.be.equal('Some fields are missing!')
+    })
+  })
+
+  describe('Invalid Routes', () => {
+    it('Ensure returns status 404 if access a wrong route', async () => {
+      const response = await supertest(app)
+      .get('/wrongRoute')
+      .expect(404)
+
+      expect(response.text).to.be.equal('Not Found!')
     })
   })
 })

@@ -39,41 +39,46 @@ const routes = {
     return response.end();
   },
   '/totalprice:post': async (request, response) => {
-    const data = JSON.parse(await once(request, "data"))
-    const { customer: { age }, carCategory: { price }, numberOfDays } = data;
-    if(!age || !price || !numberOfDays) {
+    try {
+      const data = JSON.parse(await once(request, "data"))
+      const { customer: { age }, carCategory: { price }, numberOfDays } = data;
+      const totalPrice = carService.calculateFinalPrice(
+        customer = data.customer, 
+        carCategory = data.carCategory, 
+        numberOfDays
+      )
+      response.write(JSON.stringify({ 
+        customerAge: age,
+        dayPrice: price,
+        totalPrice: totalPrice
+      }))
+      return response.end();
+    } catch(err) {
+      response.writeHead(400)
       response.write("Some fields are missing!")
       return response.end();
     }
-    const totalPrice = carService.calculateFinalPrice(
-      customer = data.customer, 
-      carCategory = data.carCategory, 
-      numberOfDays
-    )
-    response.write(JSON.stringify({ 
-      customerAge: age,
-      dayPrice: price,
-      totalPrice: totalPrice
-    }))
-    return response.end();
+
   },
   '/rent:post': async (request, response) => {
-    const data = JSON.parse(await once(request, "data"))
-    const { customer: { age }, numberOfDays } = data;
-    if(!age || !numberOfDays) {
+    try {
+      const data = JSON.parse(await once(request, "data"))
+      const { customer: { age }, numberOfDays } = data;
+
+      const [carCategory] = JSON.parse(await readFile(categoriesDatabase, "utf8"))
+  
+      const ticket = await carService.rent( 
+        customer = data.customer, 
+        carCategory, 
+        numberOfDays)
+  
+      response.write(JSON.stringify(ticket));
+      return response.end()
+    } catch(err) {
+      response.writeHead(400)
       response.write("Some fields are missing!")
       return response.end();
     }
-
-    const [carCategory] = JSON.parse(await readFile(categoriesDatabase, "utf8"))
-    
-    const ticket = await carService.rent( 
-      customer = data.customer, 
-      carCategory, 
-      numberOfDays)
-
-    response.write(JSON.stringify(ticket));
-    return response.end()
   },
   default(request, response) {
     response.writeHead(404);
