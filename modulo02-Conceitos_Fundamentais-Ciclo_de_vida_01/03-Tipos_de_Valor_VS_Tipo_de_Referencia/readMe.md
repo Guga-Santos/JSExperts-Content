@@ -17,7 +17,7 @@
 <br>
 
 ```javascript
-  const items = { counter: 0}
+  const items = { counter: 0 }
   const items2 = item
 
   item2.counter += 1
@@ -41,12 +41,13 @@ Explicação imutável:
 - O <i>counter</i> criou o endereço A000001x que apontava para o valor 0.
 - O <i>counter2</i> apontou para o endereço A000001x.
 - O <i>counter</i> apontou para outro endereço A000003x criado que recebeu o valor 1.
+- O <i>counter2</i> persiste apontando para o endereço A000001x.
 
 Explicação mutável:
 - O <i>item</i> criou o endereço A000004x que recebeu como valor B000001x.
-- B000001x era uma referência à o endereço B000001x na Memory Heap que apontava para o valor {}.
+- B000001x era uma referência ao endereço B000001x na Memory Heap que apontava para o valor {}.
 - o <i>item2</i> criou o endereço A000005x que recebeu como valor B000001x.
-- B000001x era uma referência à o endereço B000001x na Memory Heap que apontava para o valor {}.
+- B000001x era uma referência ao endereço B000001x na Memory Heap que apontava para o valor {}.
   
 
 ---
