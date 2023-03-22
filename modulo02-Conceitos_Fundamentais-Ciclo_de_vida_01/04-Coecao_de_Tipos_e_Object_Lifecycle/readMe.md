@@ -104,3 +104,5 @@ Entretando, o que é retornado desse argumento <b>( 'user' || 1 )</b> é o valor
 ```
 ** Se as duas condições forem true, o && sempre vai retornar o último argumento.
 
+O If é quem faz a coerção implícita após receber o valor.
+
