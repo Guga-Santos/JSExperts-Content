@@ -21,3 +21,28 @@ Aqui seguem exemplos de tabela contendo conversões implícitas e a diferença e
 <image src='./assets/if.png'> -->
 
 <i>fonte: https://dorey.github.io/JavaScript-Equality-Table </i>
+
+Exemplos em código:
+```javascript
+  <INPUT>                  <OUTPUT>
+
+  true + 2                  //  3
+  true - 2                  // -1
+  '21' + true               // '21true'
+  '21' - true               // 20
+  0.99999999999999999       // 1
+  0.1 + 0.2                 // 0.30000000000000004
+  0.1 + 0.2 === 0.3         // false
+  3 > 2                     // true
+  2 > 1                     // true
+  3 > 2 > 1                 // false
+  3 > 2 >= 1                // true
+  '21' - - 1                // 22
+
+  '1' == 1                  // true
+  '1' === 1                 // false
+
+  'B' + 'a' + + 'a' + 'a'   // 'BaNaNa'
+```
+
+Para mais exemplos bizarros: https://wtfjs.com
