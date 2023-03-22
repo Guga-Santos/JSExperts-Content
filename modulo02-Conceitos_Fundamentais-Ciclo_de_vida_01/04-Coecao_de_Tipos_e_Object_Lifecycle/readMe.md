@@ -81,6 +81,8 @@ Entretando, o que é retornado desse argumento <b>( 'user' || 1 )</b> é o valor
 
 <br>
 
+Material complementar: https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839
+
 ### Operador && :
 
 ```javascript
