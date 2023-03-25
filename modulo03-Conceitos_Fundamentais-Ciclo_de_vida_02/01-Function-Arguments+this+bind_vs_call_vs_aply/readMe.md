@@ -55,4 +55,50 @@ A maneira correta de fazer essa herança é usando o método bind, deixando expl
 ----
 ----
 ----
-## Call & Apply
+# Call & Apply
+Na função call, criamos um dublê (assim como no sinon) para a função e passamos os argumentos que ela precisa (event, filename):
+```javascript
+  file.watchFile.call({ showContent: () => console.log('call: hey dude') }, null, __filename)
+
+  //output::  call: hey dude
+```
+Na função apply, fazemos do mesmo jeito mas os argumentos são passados dentro de um array. É uma forma mais semântica de obter o mesmo efeito:
+```javascript
+  file.watchFile.apply({ showContent: () => console.log('apply: hey dude') }, [null, __filename])
+
+  //output:: apply: hey dude
+```
+----
+----
+----
+# Arguments
+Mostra os argumentos utilizados dentro de uma função. <b>É uma má prática!</b>
+```javascript
+'use strict';
+
+const { watch, promises: { readFile } } = require('fs');
+
+class File {
+  watchFile(event, filename) {
+    this.showContent(filename)
+    console.log('Arguments: ', arguments)
+  }
+
+  async showContent(filename) {
+    console.log((await readFile(filename)).toString());
+  }
+}
+
+const file = new File();
+
+file.watchFile.call({ showContent: () => console.log('call: hey dude') }, null, __filename)
+
+
+// output: 
+// call: hey dude
+// Arguments:  [Arguments] {
+// '0': null,
+// '1': './../../directory/directory/index.js'
+// }
+```
+** Os argumentos são o event e o filename passados dentro de watchFile e por isso vieram null e um path.
