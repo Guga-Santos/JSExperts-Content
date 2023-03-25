@@ -46,5 +46,13 @@ Uma das formas é passando uma arrow function passando os argumentos na chamada 
 <br>
 A maneira correta de fazer essa herança é usando o método bind, deixando explícito qual o contexto que a função deve seguir:
 ```javascript
+  const file = new File();
 
+  watch(__filename, file.watchFile.bind(file))
 ```
+** O bind vai substituir o this de dentro da função watchFile para quando ela for chamada.
+
+----
+----
+----
+## Call & Apply

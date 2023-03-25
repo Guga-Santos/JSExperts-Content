@@ -3,7 +3,7 @@
 const { watch, promises: { readFile } } = require('fs');
 
 class File {
-  watch(event, filename) {
+  watchFile(event, filename) {
     this.showContent(filename)
   }
 
@@ -14,8 +14,10 @@ class File {
 
 const file = new File();
 
-// watch(__filename, (event, filename) => file.watch(event, filename));
+watch(__filename, file.watchFile.bind(file))
+// watch(__filename, (event, filename) => file.watchFile(event, filename));
 
 // watch(__filename, async (event, filename) => {
 //   console.log((await readFile(filename)).toString());
 // })
+
