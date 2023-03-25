@@ -7,14 +7,14 @@ class File {
     this.showContent(filename)
   }
 
-  async showContent() {
+  async showContent(filename) {
     console.log((await readFile(filename)).toString());
   }
 }
 
 const file = new File();
 
-watch(__filename, file.watch);
+// watch(__filename, (event, filename) => file.watch(event, filename));
 
 // watch(__filename, async (event, filename) => {
 //   console.log((await readFile(filename)).toString());
